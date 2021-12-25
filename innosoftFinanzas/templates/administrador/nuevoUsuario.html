@@ -1,11 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Nuevo usuario</title>
-</head>
-<body>
+{% extends "baseTemplates/base.html" %}
 
-<h1>Se dispone a crear un nuevo  usuario </h1>
+{% block head %}
+    
+{% endblock head %}
+    <title>Nuevo usuario</title>
+{% block header %}
+    
+{% endblock header %}
+    <h1>Usuarios</h1>
+{% block navBar %}
+    {% include "baseTemplates/navBar.html" %}
+{% endblock navBar %}
+
+{% block content %}
+
+<h2>Se dispone a crear un nuevo  usuario </h2>
 
 <form action="{% url 'handleNuevoUsuario' %}" method="post">
     {% csrf_token %}
@@ -20,5 +29,8 @@
     <input type="submit" value="Crear">
 </form>
 
-</body>
-</html>
+{% endblock content %}
+
+{% block footer %}
+    {% include "baseTemplates/footer.html" %}
+{% endblock footer %}

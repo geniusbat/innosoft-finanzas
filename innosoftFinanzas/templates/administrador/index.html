@@ -1,13 +1,48 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Admin</title>
-</head>
-<body>
+{% extends "baseTemplates/base.html" %}
 
-<h1>Esta es la página de administracion</h1>
+{% block head %}
+    <title>Admin</title>
+    <div id="navbar" class="necesidades"></div>
 
-<a href="{% url 'adminUsuarios'%}">Adminstrar usuarios</a>
+<!--  Datatables  -->
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" />
 
-</body>
-</html>
+
+    <script src=https://code.jquery.com/jquery-3.5.1.js></script>
+
+<!--  extension responsive  -->
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+{% endblock head %}
+
+{% block header %}
+    <h1 class="text-center">Esta es la página de administracion</h1>
+{% endblock header %}
+
+{% block navBar %}
+    {% include "baseTemplates/navBar.html" %}
+{% endblock navBar %}
+
+{% block content %}
+    <a href="{% url 'adminUsuarios'%}">Adminstrar usuarios</a>
+    <a href="{% url 'productos'%}">Adminstrar productos</a>
+    <a href="{% url 'necesidades'%}">Adminstrar necesidades</a>
+    <a href="{% url 'productos'%}">Adminstrar sugerencias</a>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+{% endblock content %}
+
+{% block footer %}
+    {% include "baseTemplates/footer.html" %}
+{% endblock footer %}
