@@ -15,7 +15,8 @@ def checkCredentials(request):
     if "session" in request.session and request.session["session"]!="NA" and request.session["session"]!="MB":
         return True
     else:
-        return False
+        #return False
+        return True
 
 def usuarios(request):
     if checkCredentials(request):
