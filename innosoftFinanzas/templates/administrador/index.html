@@ -1,13 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Admin</title>
-</head>
-<body>
+{% extends "baseTemplates/base.html" %}
 
-<h1>Esta es la página de administracion</h1>
+{% block head %}
+    <title>Admin</title>
+    <link type="text/css" rel="stylesheet"
+         href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet"
+         href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- <script src="https://use.fontawesome.com/f89af62674.js"></script> -->
+{% endblock head %}
 
-<a href="{% url 'adminUsuarios'%}">Adminstrar usuarios</a>
+{% block header %}
+    <h1 class="text-center">Esta es la página de administracion</h1>
+{% endblock header %}
 
-</body>
-</html>
+{% block navBar %}
+    {% include "baseTemplates/navBar.html" %}
+{% endblock navBar %}
+
+{% block content %}
+    <a href="{% url 'adminUsuarios'%}">Adminstrar usuarios</a>
+    <a href="{% url 'productos'%}">Adminstrar productos</a>
+    <a href="{% url 'necesidades'%}">Adminstrar necesidades</a>
+    <a href="{% url 'productos'%}">Adminstrar sugerencias</a>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+{% endblock content %}
+
+{% block footer %}
+    {% include "baseTemplates/footer.html" %}
+{% endblock footer %}
