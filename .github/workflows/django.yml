@@ -21,8 +21,6 @@ jobs:
         pip install codacy-coverage
     - name: Run migrations
       run: cd innosoftFinanzas;python manage.py migrate
-    - name: Run tests
-      run: cd innosoftFinanzas;python ./manage.py test;
   deploy:
     runs-on: ubuntu-latest
     steps:
