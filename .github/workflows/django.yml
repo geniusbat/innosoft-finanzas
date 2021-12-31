@@ -22,7 +22,7 @@ jobs:
     - name: Run migrations
       run: cd innosoftFinanzas;python manage.py migrate
     - name: Run tests
-      run: cd innosoftFinanzas;coverage run --branch --source=. ./manage.py test inventario necesidades --keepdb; coverage xml;
+      run: python innosoftFinanzas/manage.py collectstatic --noinput;cd innosoftFinanzas;coverage run --branch --source=. ./manage.py test inventario necesidades --keepdb; coverage xml;
   deploy:
     runs-on: ubuntu-latest
     steps:
