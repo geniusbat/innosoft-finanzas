@@ -24,6 +24,7 @@ jobs:
     - name: Run tests
       run: python innosoftFinanzas/manage.py collectstatic --noinput;cd innosoftFinanzas;coverage run --branch --source=. ./manage.py test inventario necesidades --keepdb; coverage xml;
   deploy:
+    if: ${{github.ref == 'refs/heads/master' }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
