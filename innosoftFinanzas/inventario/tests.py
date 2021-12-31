@@ -1,10 +1,7 @@
-import self as self
-from django.test import TestCase
 from inventario.models import Producto, Categoria
 import json
 # Create your tests here.
 from django.test import TestCase
-from django.test import Client
 
 class InventarioTest(TestCase):
     def setUp(self):
