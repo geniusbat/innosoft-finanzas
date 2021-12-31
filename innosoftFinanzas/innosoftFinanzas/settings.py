@@ -23,7 +23,7 @@ SECRET_KEY = 'django-insecure-=$1onc5k_hpiukg^h22v=&qmlk*83g7vnfbdm#+*)(=dx1&t2q
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -137,8 +137,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
 
 STATIC_URL = '/static/'
+
 #STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     "innosoftFinanzas/templates/",
@@ -146,5 +149,8 @@ STATICFILES_DIRS = [
 # number of bits for the key, all auths should use the same number of bits
 KEYBITS = 256
 
+# Versioning
+ALLOWED_VERSIONS = ['v1', 'v2']
+DEFAULT_VERSION = 'v1'
 
 django_heroku.settings(locals(),test_runner=False)
