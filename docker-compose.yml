@@ -18,3 +18,7 @@ web_run:
   command: python innosoftFinanzas/manage.py runserver 0.0.0.0:8000
   ports:
     - "8000:8000"
+web_test:
+  extends: 
+    service: web
+  command: python innosoftFinanzas/manage.py test
