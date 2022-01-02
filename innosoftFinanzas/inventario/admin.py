@@ -1,5 +1,6 @@
 from django.contrib import admin
-from inventario.models import Producto,Necesidad
+from inventario.models import Producto
+from necesidades.models import Necesidad
 
 # Register your models here.
 
