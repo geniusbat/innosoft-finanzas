@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+
+    <a class="navbar-brand" href="/">Innosoft</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+              <a id="home" class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+              <a id="admin" class="nav-link" href="/admin">Admin</a>
+          </li>
+          <li class="nav-item">
+              <a id="productos" class="nav-link" href="/inventario/productos">Productos</a>
+          </li>
+          <li class="nav-item">
+              <a id="necesidades" class="nav-link" href="/necesidades/necesidades">Necesidades</a>
+          </li>
+          <li class="nav-item">
+              <a id="sugerencias" class="nav-link" href="#">Sugerencias</a>
+          </li>
+          <li class="nav-item">
+              <a id="login" class="nav-link" href="/login">Login</a>
+          </li>
+          <li class="nav-item">
+              <a id="register" class="nav-link" href="/register">Registro</a>
+          </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+{% load static %}
+<script src="{% static 'baseTemplates/js/navbarChange.js' %}"></script>

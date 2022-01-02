@@ -1,0 +1,36 @@
+{% extends "baseTemplates/base.html" %}
+
+{% block head %}
+    
+{% endblock head %}
+    <title>Nuevo usuario</title>
+{% block header %}
+    
+{% endblock header %}
+    <h1>Usuarios</h1>
+{% block navBar %}
+    {% include "baseTemplates/navBar.html" %}
+{% endblock navBar %}
+
+{% block content %}
+
+<h2>Se dispone a crear un nuevo  usuario </h2>
+
+<form action="{% url 'handleNuevoUsuario' %}" method="post">
+    {% csrf_token %}
+    <label>Uvus</label>
+    <input id="uvusInput" name="uvus" type="text"><br>
+    <label>Rol</label>
+    <input id="rolInput" name="rol" type="radio" value="NA"><br>
+    <input id="rolInput" name="rol" type="radio" value="MB"><br>
+    <input id="rolInput" name="rol" type="radio" value="CD"><br>
+    <input id="rolInput" name="rol" type="radio" value="PR"><br>
+    <input id="rolInput" name="rol" type="radio" value="SU"><br>
+    <input type="submit" value="Crear">
+</form>
+
+{% endblock content %}
+
+{% block footer %}
+    {% include "baseTemplates/footer.html" %}
+{% endblock footer %}

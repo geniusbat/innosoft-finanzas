@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link type="text/css" rel="stylesheet"
+         href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet"
+         href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- <script src="https://use.fontawesome.com/f89af62674.js"></script> -->
+    {% block head %}
+        <title>Base</title>
+    {% endblock head %}
+</head>
+<body style="background: linear-gradient(200deg, rgba(40,162,167,0.9136029411764706) 0%, rgba(214,237,238,1) 50%, rgba(255,255,255,1) 100%);">
+
+    {% block navBar %}
+        {% include "baseTemplates/navBar.html" %}
+    {% endblock navBar %}
+
+    {% block header %}
+        <h1>Base template!</h1>
+    {% endblock header %}
+
+    <div class="container-fluid">
+    {% block content %}
+        <p>You should fill this template with something!</p>
+        <a>It's alright if you dont</a>
+    {% endblock content %}
+
+    {% block footer %}
+        {% include "baseTemplates/footer.html" %}
+    {% endblock footer %}
+    </div>
+
+</body>
+</html>

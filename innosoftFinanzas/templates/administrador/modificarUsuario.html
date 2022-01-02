@@ -1,0 +1,35 @@
+{% extends "baseTemplates/base.html" %}
+
+{% block head %}
+    <title>Modificar usuario</title>
+{% endblock head %}
+
+{% block header %}
+    <h1>Usuarios</h1>
+{% endblock header %}
+
+{% block navBar %}
+    {% include "baseTemplates/navBar.html" %}
+{% endblock navBar %}
+
+{% block content %}
+    <h2>Se dispone a modificar el usuario {{ uvus }} </h2>
+
+    <form action="{% url 'handleModificarUsuario' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="uvus" value="{{ uvus }}">
+        <label>Uvus</label>
+        <input id="uvusInput" name="newUvus" type="text" value="{{ uvus }}"><br>
+        <label>Rol</label>
+        <input id="rolInput" name="rol" type="radio" value="NA"><br>
+        <input id="rolInput" name="rol" type="radio" value="MB"><br>
+        <input id="rolInput" name="rol" type="radio" value="CD"><br>
+        <input id="rolInput" name="rol" type="radio" value="PR"><br>
+        <input id="rolInput" name="rol" type="radio" value="SU"><br>
+        <input type="submit" value="Modificar">
+    </form>
+{% endblock content %}
+
+{% block footer %}
+    {% include "baseTemplates/footer.html" %}
+{% endblock footer %}

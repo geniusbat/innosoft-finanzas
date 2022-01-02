@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Establecer nueva necesidad</title>
+</head>
+<body>
+    <h3>Establezca una nueva necesidad</h3>
+
+    <form action="{% url 'nuevaNecesidad' %}" method="post">
+        {% csrf_token %}
+        <label>Nombre:</label>
+        <input id="nombreInput" name="nombre" type="text"><br>
+        <label>Categoria:</label>
+        <select name="comite">
+        {% for comite in comites %}
+            <option value= {{ comite.comite }}> {{ comite.comite }} </option>
+        {% endfor %}
+        </select><br>
+        <label>Cantidad necesitada:</label>
+        <input id="cantidadInput" name="cantidad" type="number"><br>
+        <label>Descripción:</label>
+        <textarea id="descripcionInput" name="descripcion"></textarea><br>
+
+        <input type="submit" value="Añadir">
+    </form>
+
+    <h3>Añada un nuevo comité</h3>
+
+    <form action="{% url 'nuevoComite' %}" method="post">
+        {% csrf_token %}
+        <label>Comite:</label>
+        <input id="comiteInput" name="comite" type="text"><br>
+        <input type="submit" value="Añadir">
+    </form>
+
+</body>
+</html> 

@@ -1,0 +1,35 @@
+name: Python application
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.8
+    - name: psycopg2 prerequisites
+      run: sudo apt-get install libpq-dev
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install codacy-coverage
+    - name: Run migrations
+      run: cd innosoftFinanzas;python manage.py migrate
+    - name: Run tests
+      run: python innosoftFinanzas/manage.py collectstatic --noinput;cd innosoftFinanzas;coverage run --branch --source=. ./manage.py test inventario necesidades --keepdb; coverage xml;
+  deploy:
+    if: ${{github.ref == 'refs/heads/master' }}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "innosoft-finanzas-egc"
+          heroku_email: "gonlalalv@alum.us.es"

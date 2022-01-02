@@ -1,0 +1,50 @@
+	<div class="modal fade" id="modalAnadirNecesidad" data-backdrop="static"
+		data-keyboard="false" tabindex="-1" aria-labelledby="Gestion"
+		aria-hidden="true">
+		<div class="modal-dialog modal-md modal-dialog-centered">
+			<div class="modal-content">
+				<form id="formAnadirNecesidad" action="{% url 'nuevaNecesidad' %}" method="post">
+                    {% csrf_token %}
+					<div class="modal-header bg-info">
+						<h5 class="modal-title" id="anadirNecesidad"></h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="form-group" id="formAnadirNecesidad">
+                            <div class="form-group col-12">
+                                <label>Nombre:</label>
+                                <input class="form-control" id="nombreInput" name="nombre" type="text"><br>
+                            </div>
+                            <div class="form-group col-12">
+                                <label>Comite:</label>
+                                <select class="form-control" name="comite">
+                                {% for comite in comites %}
+                                    <option value= {{ comite.comite }}> {{ comite.comite }} </option>
+                                {% endfor %}
+                                </select><br>
+                            </div>
+                            <div class="form-group col-12">
+                                <label>Cantidad necesitada:</label>
+                                <input  class="form-control" id="cantidadInput" name="cantidadNecesitada" type="number"><br>
+                            </div>
+                            <div class="form-group col-12">
+                                <label>Descripción:</label>
+                                <textarea class="form-control" id="descripcionInput" name="descripcion"></textarea><br>
+                            </div>
+
+
+						</div>
+					</div>
+					<div class="modal-footer"
+						style="background: rgb(23, 162, 184); background: linear-gradient(0deg, rgba(23, 162, 184, 0.75) 0%, rgba(255, 255, 255, 1) 100%);">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Cerrar</button>
+						<input type="submit" value="Añadir">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>

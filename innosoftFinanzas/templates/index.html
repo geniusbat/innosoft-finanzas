@@ -1,0 +1,62 @@
+{% extends "baseTemplates/base.html" %}
+
+{% block head %}
+    <title>Index</title>
+{% endblock head %}
+
+{% block header %}
+    <h1 class="text-center">Innosoft Finanzas</h1>
+{% endblock header %}
+
+{% block content %}
+    <div class="row my-3">
+        <div class="col-md my-2">
+            <a style="text-decoration: none;" href="/admin">
+                <div class="card text-center">
+                    <img class="card-img-top" src="https://cdn-icons-png.flaticon.com/512/417/417769.png" alt="Admin">
+                    <div class="card-body">
+                        <h5 class="card-title">Admin</h5>
+                        <p class="card-text">Administra los datos de la aplicación siempre que como usuario posea los permisos para ello</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md my-2">
+            <a style="text-decoration: none;" href="/inventario/productos">
+                <div class="card text-center">
+                    <img class="card-img-top" src="https://cdn-icons-png.flaticon.com/512/1312/1312307.png" alt="Productos">
+                    <div class="card-body">
+                        <h5 class="card-title">Productos</h5>
+                        <p class="card-text">Visualiza, crea y edita productos de Innosoft para gestionar las próximas necesidades de las jornadas</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md my-2">
+            <a style="text-decoration: none;" href="#">
+                <div class="card text-center">
+                    <img class="card-img-top" src="https://cdn-icons-png.flaticon.com/512/4797/4797118.png" alt="Necesidades">
+                    <div class="card-body">
+                        <h5 class="card-title">Necesidades</h5>
+                        <p class="card-text">Marca las necesidades para tu comité de forma cómoda y muy rápida</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md my-2">
+            <a style="text-decoration: none;" href="#">
+                <div class="card text-center">
+                    <img class="card-img-top" src="https://cdn-icons-png.flaticon.com/512/1484/1484601.png" alt="Sugerencias">
+                    <div class="card-body">
+                        <h5 class="card-title">Sugerencias</h5>
+                        <p class="card-text">¿Algo crees que podría mejorar o requiere de una revisión? Envía tu sugerencia sin miedo</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block footer %}
+    {% include "baseTemplates/footer.html" %}
+{% endblock footer %}

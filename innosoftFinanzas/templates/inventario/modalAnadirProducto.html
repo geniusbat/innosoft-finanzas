@@ -1,0 +1,54 @@
+	<div class="modal fade" id="modalAnadirProducto" data-backdrop="static"
+		data-keyboard="false" tabindex="-1" aria-labelledby="Gestion"
+		aria-hidden="true">
+		<div class="modal-dialog modal-md modal-dialog-centered">
+			<div class="modal-content">
+				<form id="formAnadirProducto" action="{% url 'nuevoProducto' %}" method="post">
+                    {% csrf_token %}
+					<div class="modal-header bg-info">
+						<h5 class="modal-title" id="anadirProducto"></h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="form-group" id="formAnadirProducto">
+                            <div class="form-group col-12">
+                                <label>Nombre:</label>
+                                <input class="form-control" id="nombreInput" name="nombre" type="text"><br>
+                            </div>
+                            <div class="form-group col-12">
+                                <label>Categoria:</label>
+                                <select class="form-control" name="categoria">
+                                {% for categoria in categorias %}
+                                    <option value= {{ categoria.categoria }}> {{ categoria.categoria }} </option>
+                                {% endfor %}
+                                </select><br>
+                            </div>
+                            <div class="form-group col-12">
+                                <label>Unidades:</label>
+                                <input  class="form-control" id="unidadesInput" name="unidades" type="number"><br>
+                            </div>
+                            <div class="form-group col-12">
+                                <label>Valor Monetario (total):</label>
+                                <input class="form-control" id="valorMonetarioInput" name="valorMonetario" type="number"><br>
+                            </div>
+                            <div class="form-group col-12">
+                                <label>Descripción:</label>
+                                <textarea class="form-control" id="descripcionInput" name="descripcion"></textarea><br>
+                            </div>
+
+
+						</div>
+					</div>
+					<div class="modal-footer"
+						style="background: rgb(23, 162, 184); background: linear-gradient(0deg, rgba(23, 162, 184, 0.75) 0%, rgba(255, 255, 255, 1) 100%);">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Cerrar</button>
+						<input type="submit" value="Añadir">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>

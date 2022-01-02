@@ -1,0 +1,44 @@
+{% extends "baseTemplates/base.html" %}
+
+{% block head %}
+    <title>Administracion de usuarios</title>
+{% endblock head %}
+
+{% block header %}
+    <h1>Esta es la página de administracion de usuarios</h1>
+{% endblock header %}
+
+{% block navBar %}
+    {% include "baseTemplates/navBar.html" %}
+{% endblock navBar %}
+
+{% block content %}
+    <a href="{% url 'nuevoUsuario' %}">Crear usuario</a>
+    <h3>Usuarios:</h3>
+    <table>
+        <tr>
+            <th>uvus</th>
+            <th>rol</th>
+        </tr>
+        {% for user in usuarios %}
+        <tr>
+            <th>
+                {{ user.uvus }}
+            </th>
+            <th>
+                {{ user.rol }}
+            </th>
+            <th>
+                <button onclick="modificarUsuario('{{ user.uvus }}')">Modificar usuario</button>
+                <button onclick="eliminarUsuario('{{ user.uvus }}')">Eliminar usuario</button>
+            </th>
+        </tr>
+        {% endfor %}
+    </table>
+    {% load static %}
+    <script src="{% static 'administrador/js/adminUsuarios.js' %}"></script>
+{% endblock content %}
+
+{% block footer %}
+    {% include "baseTemplates/footer.html" %}
+{% endblock footer %}

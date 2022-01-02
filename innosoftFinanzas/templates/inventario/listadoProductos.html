@@ -1,0 +1,125 @@
+{% extends "baseTemplates/base.html" %}
+
+{% block head %}
+    <title>Listado de productos</title>
+    <div id="navbar" class="productos"></div>
+
+<!--  Datatables  -->
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" />
+
+
+    <script src=https://code.jquery.com/jquery-3.5.1.js></script>
+
+<!--  extension responsive  -->
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+{% endblock head %}
+
+{% block navBar %}
+    {% include "baseTemplates/navBar.html" %}
+{% endblock navBar %}
+
+{% block header %}
+    <h1 align="center">Listado de productos</h1>
+    <br>
+
+{% endblock header %}
+
+
+
+{% block content %}
+
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalAnadirProducto">Añadir Producto</button>
+    <h3>Productos:</h3>
+    <table id="tablaProductos" class="table table-sm table-striped table-bordered table-hover nowrap">
+        <thead>
+            <tr>
+                <th>Nombre:</th>
+                <th>Categoría:</th>
+                <th>Unidades:</th>
+                <th>Valor Monetario:</th>
+                <th>Descripción:</th>
+                <th>Acciones:</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <th>
+                    {{ producto.nombre }}
+                </th>
+                <th>
+                    {{ producto.categoria.categoria }}
+                </th>
+                <th>
+                    {{ producto.unidades }}
+                </th>
+                <th>
+                    {{ producto.valorMonetario }}
+                </th>
+                <th>
+                    {{ producto.descripcion }}
+                </th>
+                <th>
+                    <button  onclick='mostrarModalModificarProducto( {{ producto.id }} );' class='btn btn-info btn-sm modificar' data-toggle="modal" data-target="#modalModificarProducto" type='button'>Modificar Producto</button>
+                    <button onclick="eliminarProducto('{{ producto.id }}')" class='btn btn-info btn-sm modificar' >Eliminar Producto</button>
+                </th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br><br>
+
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalAnadirCategoria">Añadir Categoría</button>
+    <h3>Categorias:</h3>
+    <table id="tablaCategorias"  class="table table-sm table-striped table-bordered table-hover nowrap">
+        <thead>
+            <tr>
+                <th>Categoria:</th>
+                <th>Acciones:</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for categoria in categorias %}
+                <tr>
+                    <th>
+                        {{ categoria.categoria }}
+                    </th>
+                    <th>
+                        <button onclick="eliminarCategoria('{{ categoria.id }}')" class='btn btn-info btn-sm modificar'>Eliminar Categoria</button>
+                    </th>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% load static %}
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+
+    <script type="text/javascript"
+			src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+		<!-- extension responsive -->
+		<script
+			src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
+    <script src="{% static 'inventario/js/listadoProductos.js' %}"></script>
+    {% include "inventario/modalAnadirCategoria.html" %}
+    {% include "inventario/modalAnadirProducto.html" %}
+    {% include "inventario/modalModificarProducto.html" %}
+{% endblock content %}
+{% block footer %}
+    {% include "baseTemplates/footer.html" %}
+{% endblock footer %}
