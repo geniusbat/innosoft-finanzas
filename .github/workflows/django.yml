@@ -18,6 +18,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        pip install djangorestframework --upgrade
         pip install codacy-coverage
     - name: Run migrations
       run: cd innosoftFinanzas;python manage.py migrate

@@ -10,3 +10,4 @@ django-heroku
 selenium
 requests
 djangorestframework
+django-rest-swagger
