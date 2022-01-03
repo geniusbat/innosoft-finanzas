@@ -97,7 +97,9 @@ class InventarioVisualTest(StaticLiveServerTestCase):
         self.driver.get(f'{self.live_server_url}/inventario/productos')
 
         self.driver.find_element(By.ID, 'botonAniadirCategoria').click()
+
         time.sleep(1)
+
         self.driver.find_element(By.ID, 'categoria').click()
         self.driver.find_element(By.ID, 'categoria').send_keys("CategoriaPrueba")
         self.driver.find_element(By.ID, '_save').click()
