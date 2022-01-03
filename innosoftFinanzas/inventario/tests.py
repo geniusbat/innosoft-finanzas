@@ -6,6 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 from base.tests import BaseTestCase
+from innosoftFinanzas import settings
 from inventario.models import Producto, Categoria
 import json
 # Create your tests here.
@@ -76,7 +77,7 @@ class InventarioVisualTest(StaticLiveServerTestCase):
         super().setUp()
 
         options = webdriver.ChromeOptions()
-        options.headless = True
+        options.headless = False
         options.add_argument('--disable-gpu')
         options.add_argument("--start-maximized")
 
@@ -95,6 +96,7 @@ class InventarioVisualTest(StaticLiveServerTestCase):
     def test_createCategoria(self):
         #self.driver.get('http://127.0.0.1:8000/inventario/productos')
         self.driver.get(f'{self.live_server_url}/inventario/productos')
+        #self.driver.get(settings.BASE_LOCAL_URL + '/inventario/productos')
 
         self.driver.find_element(By.ID, 'botonAniadirCategoria').click()
 
@@ -112,6 +114,7 @@ class InventarioVisualTest(StaticLiveServerTestCase):
     def test_eliminarCategoria(self):
         #self.driver.get('http://127.0.0.1:8000/inventario/productos')
         self.driver.get(f'{self.live_server_url}/inventario/productos')
+        #self.driver.get(settings.BASE_LOCAL_URL + '/inventario/productos')
 
         tablaCategoria = self.driver.find_element(By.ID, 'tablaCategorias')
         rowsCategoriasBefore = len(tablaCategoria.find_element(By.TAG_NAME, 'tbody').find_elements(By.TAG_NAME, 'tr'))

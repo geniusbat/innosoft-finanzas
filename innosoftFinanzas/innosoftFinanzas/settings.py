@@ -57,6 +57,8 @@ AUTHENTICATION_BACKENDS = [
 
 BASEURL = 'https://innosoft-finanzas-egc.herokuapp.com'
 
+BASE_LOCAL_URL = 'http://127.0.0.1:8000'
+
 APIS = {}
 
 MIDDLEWARE = [
