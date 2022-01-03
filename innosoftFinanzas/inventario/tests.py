@@ -76,7 +76,7 @@ class InventarioVisualTest(StaticLiveServerTestCase):
         super().setUp()
 
         options = webdriver.ChromeOptions()
-        options.headless = False
+        options.headless = True
         options.add_argument('--disable-gpu')
         options.add_argument("--start-maximized")
 
@@ -93,7 +93,9 @@ class InventarioVisualTest(StaticLiveServerTestCase):
         self.base.tearDown()
 
     def test_createCategoria(self):
-        self.driver.get('http://127.0.0.1:8000/inventario/productos')
+        #self.driver.get('http://127.0.0.1:8000/inventario/productos')
+        self.driver.get(f'{self.live_server_url}/inventario/productos')
+
         self.driver.find_element(By.ID, 'botonAniadirCategoria').click()
         time.sleep(1)
         self.driver.find_element(By.ID, 'categoria').click()
@@ -106,7 +108,8 @@ class InventarioVisualTest(StaticLiveServerTestCase):
         self.assertTrue(len(rowsCategorias) > 0)
 
     def test_eliminarCategoria(self):
-        self.driver.get('http://127.0.0.1:8000/inventario/productos')
+        #self.driver.get('http://127.0.0.1:8000/inventario/productos')
+        self.driver.get(f'{self.live_server_url}/inventario/productos')
 
         tablaCategoria = self.driver.find_element(By.ID, 'tablaCategorias')
         rowsCategoriasBefore = len(tablaCategoria.find_element(By.TAG_NAME, 'tbody').find_elements(By.TAG_NAME, 'tr'))
