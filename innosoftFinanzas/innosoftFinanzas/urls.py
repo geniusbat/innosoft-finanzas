@@ -22,7 +22,7 @@ from usuarios import views as usuariosViews
 from administrador import views as adminViews
 from inventario import views as inventarioViews
 from necesidades import views as necesidadesViews
-
+from sugerencias import views as sugerenciasViews
 #Comentar en mayusculas el módulo al que se refiere la url
 
 urlpatterns = [
@@ -59,4 +59,8 @@ urlpatterns = [
     path("necesidades/necesidades", necesidadesViews.listNecesidad, name="necesidades"),
     path("necesidades/nuevaNecesidad", necesidadesViews.formNecesidad, name="nuevaNecesidad"),
     path("necesidades/nuevoComite", necesidadesViews.formComite, name="nuevoComite"),
+    # SUGERENCIAS
+    path('sugerencias/', sugerenciasViews.index, name='sugerencia'),
+    path('sugerenciaFormulario/', sugerenciasViews.addSug, name='añadirSugerencia'),
+    path('sugerenciaNueva/', sugerenciasViews.handleSugSubmit, name='handleSugSubmit'),
 ]

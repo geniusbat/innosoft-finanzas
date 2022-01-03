@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nueva sugerencia</title>
+</head>
+<body>
+<form action="{% url 'handleSugSubmit' %}" method="post">
+    <label>Uvus: </label>
+    <input id="sugUvusID" name="sugUvus" type="text">
+    <label>Tipo: </label>
+    <select name="sugTipo" id="sugTipoID">
+        <option value="tecnica">Técnica</option>
+        <option value="innosoft">Sugerencia para innosoft</option>
+    </select>
+    <label>Descripción: </label>
+    <input id="sugDescriptionID" name="sugDescription" type="text"><br>
+    <input type="submit" value="sugSubmit">
+</form>
+</body>

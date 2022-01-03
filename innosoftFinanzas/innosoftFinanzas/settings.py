@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'inventario',
     'usuarios',
     'necesidades',
-    'administrador'
+    'administrador',
+    'sugerencia'
 ]
 
 REST_FRAMEWORK = {

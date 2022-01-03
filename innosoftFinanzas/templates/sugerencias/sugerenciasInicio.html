@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sugerencias</title>
+
+</head>
+<body>
+<button action="{% url 'handleSugSubmit' %}">nueva sugerencia</button>
+<form method="get">
+<select name="selector" id="selector">
+    <option value="all">Todo</option>
+    <option value="sugTecnica">Sugerencias técnicas</option>
+    <option value="sugInno">Sugerencias Innosoft</option>
+</select>
+    <input type="submit">
+</form>
+</body>
+</html>
