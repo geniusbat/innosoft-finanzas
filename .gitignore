@@ -24,6 +24,9 @@ media
 .idea/**/libraries 
 *.iws /out/ 
 innosoftFinanzas/inventario/migrations/*
+virtualEnv
+virtualEnv/*
+innosoftFinanzas/staticfiles/*
 
 # Python # 
 *.py[cod] 
