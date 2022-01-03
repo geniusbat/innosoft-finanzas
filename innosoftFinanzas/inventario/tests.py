@@ -95,8 +95,8 @@ class InventarioVisualTest(StaticLiveServerTestCase):
 
     def test_createCategoria(self):
         #self.driver.get('http://127.0.0.1:8000/inventario/productos')
-        self.driver.get(f'{self.live_server_url}/inventario/productos')
-        #self.driver.get(settings.BASE_LOCAL_URL + '/inventario/productos')
+        #self.driver.get(f'{self.live_server_url}/inventario/productos')
+        self.driver.get(settings.BASE_LOCAL_URL + '/inventario/productos')
 
         self.driver.find_element(By.ID, 'botonAniadirCategoria').click()
 
@@ -113,8 +113,8 @@ class InventarioVisualTest(StaticLiveServerTestCase):
 
     def test_eliminarCategoria(self):
         #self.driver.get('http://127.0.0.1:8000/inventario/productos')
-        self.driver.get(f'{self.live_server_url}/inventario/productos')
-        #self.driver.get(settings.BASE_LOCAL_URL + '/inventario/productos')
+        #self.driver.get(f'{self.live_server_url}/inventario/productos')
+        self.driver.get(settings.BASE_LOCAL_URL + '/inventario/productos')
 
         tablaCategoria = self.driver.find_element(By.ID, 'tablaCategorias')
         rowsCategoriasBefore = len(tablaCategoria.find_element(By.TAG_NAME, 'tbody').find_elements(By.TAG_NAME, 'tr'))
