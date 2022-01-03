@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Necesidad</title>
+</head>
+<body>
+    <form action="/inventario/necesidad/" method="POST">{% csrf_token %}
+
+        <p>Nombre: <input type="text" name="nombre"></p>
+        <p>Comité: <input type="text" name="comite"></p>
+        <p>Cantidad: <input type="number" name="cantidad"></p>
+        <p>Descripción: <textarea name="descripcion"></textarea></p>
+
+        <input type="submit" value="Enviar">
+
+    </form>
+</body>
+</html>
