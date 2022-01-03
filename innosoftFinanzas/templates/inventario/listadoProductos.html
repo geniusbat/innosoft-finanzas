@@ -35,7 +35,7 @@
 
 {% block content %}
 
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalAnadirProducto">Añadir Producto</button>
+    <button id="botonAniadirProducto" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalAnadirProducto">Añadir Producto</button>
     <h3>Productos:</h3>
     <table id="tablaProductos" class="table table-sm table-striped table-bordered table-hover nowrap">
         <thead>
@@ -76,7 +76,7 @@
     </table>
     <br><br>
 
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalAnadirCategoria">Añadir Categoría</button>
+    <button id="botonAniadirCategoria" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalAnadirCategoria">Añadir Categoría</button>
     <h3>Categorias:</h3>
     <table id="tablaCategorias"  class="table table-sm table-striped table-bordered table-hover nowrap">
         <thead>
@@ -92,7 +92,7 @@
                         {{ categoria.categoria }}
                     </th>
                     <th>
-                        <button onclick="eliminarCategoria('{{ categoria.id }}')" class='btn btn-info btn-sm modificar'>Eliminar Categoria</button>
+                        <button onclick="eliminarCategoria('{{ categoria.id }}')" class='btn btn-info btn-sm modificar eliminarCategoria'>Eliminar Categoria</button>
                     </th>
                 </tr>
             {% endfor %}
