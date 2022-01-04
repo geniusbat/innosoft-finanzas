@@ -20,9 +20,10 @@
                             </div>
                             <div class="form-group col-12">
                                 <label>Comite:</label>
-                                <select class="form-control" name="comite">
+                                <select class="form-control" id="comiteInput" name="comite">
+
                                 {% for comite in comites %}
-                                    <option value= {{ comite.comite }}> {{ comite.comite }} </option>
+                                    <option id={{comite.comite}} value= {{ comite.comite }}> {{ comite.comite }} </option>
                                 {% endfor %}
                                 </select><br>
                             </div>
@@ -42,7 +43,7 @@
 						style="background: rgb(23, 162, 184); background: linear-gradient(0deg, rgba(23, 162, 184, 0.75) 0%, rgba(255, 255, 255, 1) 100%);">
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">Cerrar</button>
-						<input type="submit" value="Añadir">
+						<input id="save" type="submit" value="Añadir">
 					</div>
 				</form>
 			</div>
