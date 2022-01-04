@@ -93,40 +93,81 @@ class InventarioVisualTest(StaticLiveServerTestCase):
         self.driver.quit()
         self.base.tearDown()
 
-    def test_createCategoria(self):
+    def get_rows_tabla(self, idTabla):
+        tabla = self.driver.find_element(By.ID, idTabla)
+        rows = len(tabla.find_element(By.TAG_NAME, 'tbody').find_elements(By.TAG_NAME, 'tr'))
+
+        rowsTablaEmpty = tabla.find_element(By.TAG_NAME, 'tbody').find_elements(By.CLASS_NAME, 'dataTables_empty')
+
+        if rowsTablaEmpty is not None and len(rowsTablaEmpty) > 0:
+            rows -= 1
+
+        return rows
+
+    def test_1_createCategoria(self):
         #self.driver.get('http://127.0.0.1:8000/inventario/productos')
         #self.driver.get(f'{self.live_server_url}/inventario/productos')
         self.driver.get(settings.BASE_LOCAL_URL + '/inventario/productos')
+
+        rowsCategoriasBefore = self.get_rows_tabla('tablaCategorias')
 
         self.driver.find_element(By.ID, 'botonAniadirCategoria').click()
 
         time.sleep(1)
 
         self.driver.find_element(By.ID, 'categoria').click()
-        self.driver.find_element(By.ID, 'categoria').send_keys("CategoriaPrueba")
-        self.driver.find_element(By.ID, '_save').click()
+        self.driver.find_element(By.ID, 'categoria').send_keys("__TEST__CATEGORIA")
+        self.driver.find_element(By.ID, '_saveCategoria').click()
 
-        tablaCategoria = self.driver.find_element(By.ID, 'tablaCategorias')
-        rowsCategorias = tablaCategoria.find_element(By.TAG_NAME, 'tbody').find_elements(By.TAG_NAME, 'tr')
+        rowsCategoriasAfter = self.get_rows_tabla('tablaCategorias')
 
-        self.assertTrue(len(rowsCategorias) > 0)
+        self.assertGreater(rowsCategoriasAfter, rowsCategoriasBefore)
 
-    def test_eliminarCategoria(self):
+    def test_2_createProducto(self):
+        # self.driver.get('http://127.0.0.1:8000/inventario/productos')
+        # self.driver.get(f'{self.live_server_url}/inventario/productos')
+        self.driver.get(settings.BASE_LOCAL_URL + '/inventario/productos')
+
+        rowsProductosBefore = self.get_rows_tabla('tablaProductos')
+
+        self.driver.find_element(By.ID, 'botonAniadirProducto').click()
+
+        time.sleep(1)
+
+        self.driver.find_element(By.ID, 'nombreInput').click()
+        self.driver.find_element(By.ID, 'nombreInput').send_keys("__TEST__PRODUCTO")
+        self.driver.find_element(By.ID, 'unidadesInput').click()
+        self.driver.find_element(By.ID, 'unidadesInput').send_keys("10")
+        self.driver.find_element(By.ID, 'valorMonetarioInput').click()
+        self.driver.find_element(By.ID, 'valorMonetarioInput').send_keys("10")
+        self.driver.find_element(By.ID, '_saveProducto').click()
+
+        rowsProductosAfter = self.get_rows_tabla('tablaProductos')
+
+        self.assertGreater(rowsProductosAfter, rowsProductosBefore)
+
+    def test_3_eliminarProducto(self):
         #self.driver.get('http://127.0.0.1:8000/inventario/productos')
         #self.driver.get(f'{self.live_server_url}/inventario/productos')
         self.driver.get(settings.BASE_LOCAL_URL + '/inventario/productos')
 
-        tablaCategoria = self.driver.find_element(By.ID, 'tablaCategorias')
-        rowsCategoriasBefore = len(tablaCategoria.find_element(By.TAG_NAME, 'tbody').find_elements(By.TAG_NAME, 'tr'))
+        rowsCategoriasBefore = self.get_rows_tabla('tablaProductos')
+
+        self.driver.find_element(By.CLASS_NAME, 'eliminarProducto').click()
+
+        rowsCategoriasAfter = self.get_rows_tabla('tablaProductos')
+
+        self.assertGreater(rowsCategoriasBefore, rowsCategoriasAfter)
+
+    def test_4_eliminarCategoria(self):
+        #self.driver.get('http://127.0.0.1:8000/inventario/productos')
+        #self.driver.get(f'{self.live_server_url}/inventario/productos')
+        self.driver.get(settings.BASE_LOCAL_URL + '/inventario/productos')
+
+        rowsCategoriasBefore = self.get_rows_tabla('tablaCategorias')
 
         self.driver.find_element(By.CLASS_NAME, 'eliminarCategoria').click()
 
-        tablaCategoria = self.driver.find_element(By.ID, 'tablaCategorias')
-        rowsCategoriasAfter = len(tablaCategoria.find_element(By.TAG_NAME, 'tbody').find_elements(By.TAG_NAME, 'tr'))
-
-        rowsTabla = tablaCategoria.find_element(By.TAG_NAME, 'tbody').find_elements(By.CLASS_NAME, 'dataTables_empty')
-
-        if rowsTabla is not None and len(rowsTabla) > 0:
-            rowsCategoriasAfter -= 1
+        rowsCategoriasAfter = self.get_rows_tabla('tablaCategorias')
 
         self.assertGreater(rowsCategoriasBefore, rowsCategoriasAfter)
