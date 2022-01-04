@@ -104,10 +104,10 @@ class InventarioVisualTest(StaticLiveServerTestCase):
 
         return rows
 
-    def test_1_createCategoria(self):
-        #self.driver.get('http://127.0.0.1:8000/inventario/productos')
+    def createCategoria(self):
+        self.driver.get("{}/inventario/productos".format(self.live_server_url))
         #self.driver.get(f'{self.live_server_url}/inventario/productos')
-        self.driver.get(settings.BASE_LOCAL_URL + '/inventario/productos')
+        #self.driver.get(settings.BASE_LOCAL_URL + '/inventario/productos')
 
         rowsCategoriasBefore = self.get_rows_tabla('tablaCategorias')
 
@@ -123,10 +123,10 @@ class InventarioVisualTest(StaticLiveServerTestCase):
 
         self.assertGreater(rowsCategoriasAfter, rowsCategoriasBefore)
 
-    def test_2_createProducto(self):
-        # self.driver.get('http://127.0.0.1:8000/inventario/productos')
-        # self.driver.get(f'{self.live_server_url}/inventario/productos')
-        self.driver.get(settings.BASE_LOCAL_URL + '/inventario/productos')
+    def createProducto(self):
+        self.driver.get("{}/inventario/productos".format(self.live_server_url))
+        #self.driver.get(f'{self.live_server_url}/inventario/productos')
+        #self.driver.get(settings.BASE_LOCAL_URL + '/inventario/productos')
 
         rowsProductosBefore = self.get_rows_tabla('tablaProductos')
 
@@ -146,10 +146,10 @@ class InventarioVisualTest(StaticLiveServerTestCase):
 
         self.assertGreater(rowsProductosAfter, rowsProductosBefore)
 
-    def test_3_eliminarProducto(self):
-        #self.driver.get('http://127.0.0.1:8000/inventario/productos')
+    def eliminarProducto(self):
+        self.driver.get("{}/inventario/productos".format(self.live_server_url))
         #self.driver.get(f'{self.live_server_url}/inventario/productos')
-        self.driver.get(settings.BASE_LOCAL_URL + '/inventario/productos')
+        #self.driver.get(settings.BASE_LOCAL_URL + '/inventario/productos')
 
         rowsCategoriasBefore = self.get_rows_tabla('tablaProductos')
 
@@ -159,10 +159,10 @@ class InventarioVisualTest(StaticLiveServerTestCase):
 
         self.assertGreater(rowsCategoriasBefore, rowsCategoriasAfter)
 
-    def test_4_eliminarCategoria(self):
-        #self.driver.get('http://127.0.0.1:8000/inventario/productos')
+    def eliminarCategoria(self):
+        self.driver.get("{}/inventario/productos".format(self.live_server_url))
         #self.driver.get(f'{self.live_server_url}/inventario/productos')
-        self.driver.get(settings.BASE_LOCAL_URL + '/inventario/productos')
+        #self.driver.get(settings.BASE_LOCAL_URL + '/inventario/productos')
 
         rowsCategoriasBefore = self.get_rows_tabla('tablaCategorias')
 
@@ -171,3 +171,19 @@ class InventarioVisualTest(StaticLiveServerTestCase):
         rowsCategoriasAfter = self.get_rows_tabla('tablaCategorias')
 
         self.assertGreater(rowsCategoriasBefore, rowsCategoriasAfter)
+
+    def test_createCategoria(self):
+        self.createCategoria()
+
+    def test_createProducto(self):
+        self.createCategoria()
+        self.createProducto()
+
+    def test_eliminarProducto(self):
+        self.createCategoria()
+        self.createProducto()
+        self.eliminarProducto()
+
+    def test_eliminarCategoria(self):
+        self.createCategoria()
+        self.eliminarCategoria()
