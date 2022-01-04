@@ -1,16 +1,9 @@
-import time
-
-from django.contrib.staticfiles.testing import StaticLiveServerTestCase
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-
-from base.tests import BaseTestCase
-from innosoftFinanzas import settings
-from inventario.models import Producto, Categoria
 import json
+
 # Create your tests here.
 from django.test import TestCase
+
+from inventario.models import Producto, Categoria
 
 
 class InventarioTest(TestCase):
