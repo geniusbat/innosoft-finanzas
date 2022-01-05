@@ -26,13 +26,37 @@ class InventarioTest(TestCase):
         self.assertTrue(Producto.objects.all().filter(nombre="Prueba 1").exists())
         self.assertTrue(Producto.objects.all().filter(categoria=c).exists())
 
-    def test_create_producto_from_form(self):
+    def test_modify_producto(self):
         c = Categoria(categoria="Prueba")
         c.save()
         p = Producto(nombre="Prueba 1", categoria=c, unidades=1, valorMonetario=12, descripcion="holaaa")
         p.save()
         self.assertTrue(Producto.objects.all().filter(nombre="Prueba 1").exists())
         self.assertTrue(Producto.objects.all().filter(categoria=c).exists())
+
+        p.nombre = "Prueba 2"
+        p.save()
+        self.assertTrue(not Producto.objects.all().filter(nombre="Prueba 1").exists())
+        self.assertTrue(Producto.objects.all().filter(nombre="Prueba 2").exists())
+        self.assertTrue(Producto.objects.all().filter(categoria=c).exists())
+
+    def test_delete_categoria(self):
+        c = Categoria(categoria="Prueba")
+        c.save()
+        self.assertTrue(Categoria.objects.all().filter(categoria="Prueba").exists())
+        c.delete()
+        self.assertTrue(not Categoria.objects.all().filter(categoria="Prueba").exists())
+
+    def test_delete_producto(self):
+        c = Categoria(categoria="Prueba")
+        c.save()
+        p = Producto(nombre="Prueba 1", categoria=c, unidades=1, valorMonetario=12, descripcion="holaaa")
+        p.save()
+        self.assertTrue(Producto.objects.all().filter(nombre="Prueba 1").exists())
+        self.assertTrue(Producto.objects.all().filter(categoria=c).exists())
+        p.delete()
+        self.assertTrue(not Producto.objects.all().filter(nombre="Prueba 1").exists())
+        self.assertTrue(not Producto.objects.all().filter(categoria=c).exists())
 
     def test_list_productos(self):
         resp = self.client.get('/inventario/productos')
@@ -63,3 +87,22 @@ class InventarioTest(TestCase):
         y = json.loads(s)
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(y["nombre"], 'Prueba 1')
+
+
+    def test_form_delete_categoria(self):
+        c = Categoria(categoria="Prueba")
+        c.save()
+        self.assertTrue(Categoria.objects.all().filter(categoria="Prueba").exists())
+        resp = self.client.post('/inventario/categoria/eliminar/' +str(c.id))
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue(not Categoria.objects.all().filter(categoria="Prueba").exists())
+
+    def test_form_delete_productos(self):
+        c = Categoria(categoria="Prueba")
+        c.save()
+        p = Producto(nombre="Prueba 1", categoria=c, unidades=1, valorMonetario=12, descripcion="holaaa")
+        p.save()
+        self.assertTrue(Producto.objects.all().filter(nombre="Prueba 1").exists())
+        resp = self.client.post('/inventario/productos/eliminar/' +str(p.id))
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue(not Producto.objects.all().filter(nombre="Prueba 1").exists())
