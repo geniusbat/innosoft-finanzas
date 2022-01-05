@@ -63,8 +63,8 @@
                     {{ necesidad.descripcion }}
                 </th>
                 <th>
-                    <button  onclick='mostrarModalModificarNecesidad( {{ necesidad.id }} );' class='btn btn-info btn-sm modificar' data-toggle="modal" data-target="#modalModificarNecesidad" type='button'>Modificar Necesidad</button>
-                    <button onclick="eliminarNecesidad('{{ necesidad.id }}')" class='btn btn-info btn-sm modificar' >Eliminar Necesidad</button>
+                    <button  onclick='mostrarModalModificarNecesidad( {{ necesidad.id }} );' class='btn btn-info btn-sm modificar modificarNecesidad' data-toggle="modal" data-target="#modalModificarNecesidad" type='button'>Modificar Necesidad</button>
+                    <button onclick="eliminarNecesidad('{{ necesidad.id }}')" class='btn btn-info btn-sm modificar eliminarNecesidad' >Eliminar Necesidad</button>
 
                 </th>
             </tr>
@@ -113,15 +113,58 @@
 			src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 
     <script>
-    function eliminarNecesidad(id) {
+
+function modificarNecesidad(id) {
+    window.location.href = '/necesidades/modificar/'+id;
+}
+
+function eliminarNecesidad(id) {
     window.location.href = '/necesidades/eliminar/'+id;
 }
-    function eliminarComite(id) {
-        window.location.href = '/necesidades/comite/eliminar/'+id;
+
+function eliminarComite(id) {
+    window.location.href = '/necesidades/comite/eliminar/'+id;
+}
+
+$(document).ready( function () {
+
+    $('#tablaProductos').DataTable({
+        responsive: true,
+		"language" : {
+			"url" : "https:////cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+		},
+        "lengthMenu" : [ 5,4,3,2 ]
+    });
+
+    $('#tablaCategorias').DataTable({
+        responsive: true,
+		"language" : {
+			"url" : "https:////cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+		},
+        "lengthMenu" : [ 5,4,3,2 ],
+    });
+
+} );
+
+function mostrarModalModificarNecesidad(id) {
+
+    $.ajax({
+        type: 'GET',
+        url: '/necesidades/modificar/' + id,
+        success: function (edit) {
+            data = JSON.parse(edit)
+            console.log($('#modalModificarNecesidad #comiteInput').val)
+            $('#modalModificarNecesidad #id').val(id);
+            $('#modalModificarNecesidad #nombreInput').val(data["nombre"]);
+            $('#modalModificarNecesidad #comiteInput').val(data["comite"]);
+            $('#modalModificarNecesidad #cantidadInput').val(data["cantidad"]);
+            $('#modalModificarNecesidad #descripcionInput').val(data["descripcion"]);
+        }
+    });
+
 }
     </script>
 
-    <script src="{% static 'necesidades/js/listadoNecesidades.js' %}"></script>
     {% include "necesidades/modalAnadirComite.html" %}
     {% include "necesidades/modalAnadirNecesidad.html" %}
     {% include "necesidades/modalModificarNecesidad.html" %}

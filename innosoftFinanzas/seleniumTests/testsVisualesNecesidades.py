@@ -35,11 +35,22 @@ class NecesidadVisualTest(StaticLiveServerTestCase):
         self.driver.quit()
         self.base.tearDown()
 
-    def test_createComite(self):
+    def get_rows_tabla(self, idTabla):
+        tabla = self.driver.find_element(By.ID, idTabla)
+        rows = len(tabla.find_element(By.TAG_NAME, 'tbody').find_elements(By.TAG_NAME, 'tr'))
+
+        rowsTablaEmpty = tabla.find_element(By.TAG_NAME, 'tbody').find_elements(By.CLASS_NAME, 'dataTables_empty')
+
+        if rowsTablaEmpty is not None and len(rowsTablaEmpty) > 0:
+            rows -= 1
+
+        return rows
+
+    def createComite(self):
         #no hay delete comite por ahora asi que da error si se hace otro test
         #self.driver.get('http://127.0.0.1:8000/inventario/productos')
         #self.driver.get(f'{self.live_server_url}/inventario/productos')
-        self.driver.get(settings.BASE_LOCAL_URL + '/necesidades/necesidades')
+        self.driver.get("{}/necesidades/necesidades".format(self.live_server_url))
 
         self.driver.find_element(By.ID, 'botonAniadirComite').click()
 
@@ -54,11 +65,11 @@ class NecesidadVisualTest(StaticLiveServerTestCase):
 
         self.assertTrue(len(rowsCategorias) > 0)
 
-    def test_createNecesidad(self):
+    def createNecesidad(self):
         #no hay delete necesidad por ahora
         #self.driver.get('http://127.0.0.1:8000/inventario/productos')
         #self.driver.get(f'{self.live_server_url}/inventario/productos')
-        self.driver.get(settings.BASE_LOCAL_URL + '/necesidades/necesidades')
+        self.driver.get("{}/necesidades/necesidades".format(self.live_server_url))
 
         self.driver.find_element(By.ID, 'botonAniadirNecesidad').click()
 
@@ -79,3 +90,54 @@ class NecesidadVisualTest(StaticLiveServerTestCase):
         rowsCategorias = tablaCategoria.find_element(By.TAG_NAME, 'tbody').find_elements(By.TAG_NAME, 'tr')
 
         self.assertTrue(len(rowsCategorias) > 0)
+
+    def editNecesidad(self):
+        self.driver.get("{}/necesidades/necesidades".format(self.live_server_url))
+
+        rowsNecesidadesBefore = self.get_rows_tabla('tablaNecesidad')
+
+        self.driver.find_element(By.CLASS_NAME, 'modificarNecesidad').click()
+
+        time.sleep(2)
+
+        self.driver.find_element(By.ID, 'formModificarNecesidad').find_element(By.ID, 'nombreInput').click()
+        self.driver.find_element(By.ID, 'formModificarNecesidad').find_element(By.ID, 'nombreInput').send_keys("__EDIT")
+        self.driver.find_element(By.ID, 'formModificarNecesidad').find_element(By.ID, '_editNecesidad').click()
+
+        rowsNecesidadesAfter = self.get_rows_tabla('tablaNecesidad')
+
+        tabla = self.driver.find_element(By.ID, 'tablaNecesidad')
+        rows = tabla.find_element(By.TAG_NAME, 'tbody').find_elements(By.TAG_NAME, 'tr')
+
+        textoNecesidad = [r.text.split()[0] for r in rows]
+
+        self.assertEqual(rowsNecesidadesBefore, rowsNecesidadesAfter)
+        self.assertTrue('nombrePrueba1__EDIT' in textoNecesidad)
+
+    def eliminarNecesidad(self):
+        self.driver.get("{}/necesidades/necesidades".format(self.live_server_url))
+
+        rowsCategoriasBefore = self.get_rows_tabla('tablaNecesidad')
+
+        self.driver.find_element(By.CLASS_NAME, 'eliminarNecesidad').click()
+
+        rowsCategoriasAfter = self.get_rows_tabla('tablaNecesidad')
+
+        self.assertGreater(rowsCategoriasBefore, rowsCategoriasAfter)
+
+    def test_create_comite(self):
+        self.createComite()
+
+    def test_create_necesidad(self):
+        self.createComite()
+        self.createNecesidad()
+
+    def test_edit_necesidad(self):
+        self.createComite()
+        self.createNecesidad()
+        self.editNecesidad()
+
+    def test_eliminar_necesidad(self):
+        self.createComite()
+        self.createNecesidad()
+        self.eliminarNecesidad()
