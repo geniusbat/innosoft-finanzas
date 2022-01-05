@@ -64,3 +64,22 @@ def handlemodificarNecesidad(request):
 
             return listNecesidad(request)
 
+def eliminarNecesidad(request, id):
+    context = {}
+
+    if Necesidad.objects.filter(id=id).exists():
+        necesidad = Necesidad.objects.get(id=id)
+        necesidad.delete()
+        return listNecesidad(request)
+    else:
+        return listNecesidad(request)
+
+def eliminarComite(request, id):
+    context = {}
+
+    if Comite.objects.filter(id=id).exists():
+        comite = Comite.objects.get(id=id)
+        comite.delete()
+        return listNecesidad(request)
+    else:
+        return listNecesidad(request)
