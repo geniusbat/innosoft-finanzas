@@ -67,7 +67,7 @@
                     {{ producto.descripcion }}
                 </th>
                 <th>
-                    <button  onclick='mostrarModalModificarProducto( {{ producto.id }} );' class='btn btn-info btn-sm modificar' data-toggle="modal" data-target="#modalModificarProducto" type='button'>Modificar Producto</button>
+                    <button  onclick='mostrarModalModificarProducto( {{ producto.id }} );' class='btn btn-info btn-sm modificar modificarProducto' data-toggle="modal" data-target="#modalModificarProducto" type='button'>Modificar Producto</button>
                     <button onclick="eliminarProducto('{{ producto.id }}')" class='btn btn-info btn-sm modificar eliminarProducto' >Eliminar Producto</button>
                 </th>
             </tr>

@@ -41,8 +41,6 @@ class InventarioVisualTest(StaticLiveServerTestCase):
 
     def createCategoria(self):
         self.driver.get("{}/inventario/productos".format(self.live_server_url))
-        #self.driver.get(f'{self.live_server_url}/inventario/productos')
-        #self.driver.get(settings.BASE_LOCAL_URL + '/inventario/productos')
 
         rowsCategoriasBefore = self.get_rows_tabla('tablaCategorias')
 
@@ -60,8 +58,6 @@ class InventarioVisualTest(StaticLiveServerTestCase):
 
     def createProducto(self):
         self.driver.get("{}/inventario/productos".format(self.live_server_url))
-        #self.driver.get(f'{self.live_server_url}/inventario/productos')
-        #self.driver.get(settings.BASE_LOCAL_URL + '/inventario/productos')
 
         rowsProductosBefore = self.get_rows_tabla('tablaProductos')
 
@@ -81,10 +77,31 @@ class InventarioVisualTest(StaticLiveServerTestCase):
 
         self.assertGreater(rowsProductosAfter, rowsProductosBefore)
 
+    def editProducto(self):
+        self.driver.get("{}/inventario/productos".format(self.live_server_url))
+
+        rowsProductosBefore = self.get_rows_tabla('tablaProductos')
+
+        self.driver.find_element(By.CLASS_NAME, 'modificarProducto').click()
+
+        time.sleep(2)
+
+        self.driver.find_element(By.ID, 'formModificarProducto').find_element(By.ID, 'nombreInput').click()
+        self.driver.find_element(By.ID, 'formModificarProducto').find_element(By.ID, 'nombreInput').send_keys("__EDIT")
+        self.driver.find_element(By.ID, 'formModificarProducto').find_element(By.ID, '_editProducto').click()
+
+        rowsProductosAfter = self.get_rows_tabla('tablaProductos')
+
+        tabla = self.driver.find_element(By.ID, 'tablaProductos')
+        rows = tabla.find_element(By.TAG_NAME, 'tbody').find_elements(By.TAG_NAME, 'tr')
+
+        textoProducto = [r.text.split()[0] for r in rows]
+
+        self.assertEqual(rowsProductosBefore, rowsProductosAfter)
+        self.assertTrue('__TEST__PRODUCTO__EDIT' in textoProducto)
+
     def eliminarProducto(self):
         self.driver.get("{}/inventario/productos".format(self.live_server_url))
-        #self.driver.get(f'{self.live_server_url}/inventario/productos')
-        #self.driver.get(settings.BASE_LOCAL_URL + '/inventario/productos')
 
         rowsCategoriasBefore = self.get_rows_tabla('tablaProductos')
 
@@ -96,8 +113,6 @@ class InventarioVisualTest(StaticLiveServerTestCase):
 
     def eliminarCategoria(self):
         self.driver.get("{}/inventario/productos".format(self.live_server_url))
-        #self.driver.get(f'{self.live_server_url}/inventario/productos')
-        #self.driver.get(settings.BASE_LOCAL_URL + '/inventario/productos')
 
         rowsCategoriasBefore = self.get_rows_tabla('tablaCategorias')
 
@@ -113,6 +128,11 @@ class InventarioVisualTest(StaticLiveServerTestCase):
     def test_createProducto(self):
         self.createCategoria()
         self.createProducto()
+
+    def test_editProducto(self):
+        self.createCategoria()
+        self.createProducto()
+        self.editProducto()
 
     def test_eliminarProducto(self):
         self.createCategoria()
