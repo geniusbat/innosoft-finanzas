@@ -1,6 +1,7 @@
 import json
-
+import sys
 # Create your tests here.
+from django.db import transaction
 from django.test import TestCase
 
 from inventario.models import Producto, Categoria
@@ -25,6 +26,18 @@ class InventarioTest(TestCase):
         p.save()
         self.assertTrue(Producto.objects.all().filter(nombre="Prueba 1").exists())
         self.assertTrue(Producto.objects.all().filter(categoria=c).exists())
+
+    def test_not_create_producto(self):
+        c = Categoria(categoria="Prueba")
+        c.save()
+        try:
+            with transaction.atomic():
+                p = Producto(nombre="Prueba 1", categoria=c, unidades=1, valorMonetario="no es un valor numerico", descripcion="holaaa")
+                p.save()
+        except ValueError as error:
+            self.assertTrue(not Producto.objects.all().filter(nombre="Prueba 1").exists())
+            self.assertTrue(not Producto.objects.all().filter(categoria=c).exists())
+            self.assertTrue(str(error) == "Field 'valorMonetario' expected a number but got 'no es un valor numerico'.")
 
     def test_modify_producto(self):
         c = Categoria(categoria="Prueba")
