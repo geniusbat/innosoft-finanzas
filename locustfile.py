@@ -2,6 +2,13 @@ from re import T
 from locust import HttpUser, task, between
 import random
 
+from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
+
+
 HOST = "http://127.0.0.1:8000/"
 #Command:  locust --headless --users 1 --spawn-rate 1 -H "http://127.0.0.1:8000/"
 
@@ -12,10 +19,22 @@ class Test(HttpUser):
         self.password = "pass"
         self.logged = False
         #ALERTA: Para comenzar el test se debe tener en la base de datos una categoría llamada "testCategory"
+
+        #Selenium
+        options = webdriver.ChromeOptions()
+        options.headless = True
+        options.add_argument("user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36")
+        options.add_argument('--disable-blink-features=AutomationControlled')
+        options.add_argument("--disable-extensions")
+        options.add_experimental_option('useAutomationExtension', False)
+        options.add_experimental_option("excludeSwitches", ["enable-automation"])
+        self.driver = webdriver.Chrome(options=options)
+        self.driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+
     def on_stop(self):
-        pass
+        self.driver.quit()
     @task
-    def login(self):
+    def login(self): #Remember that if it returns error 500 it is because it may be trying to log in before having a user. This is intended as the idea is to swarm the service
         response = self.client.get("login")
         csrftoken = response.cookies['csrftoken']
         response = self.client.post("handlelogin",{"uvus":self.uvus,"password":self.password},headers={"X-CSRFToken": csrftoken})
@@ -37,7 +56,7 @@ class Test(HttpUser):
             print("Created user and was: ", ret)
             response = self.client.get("register")
             csrftoken = response.cookies['csrftoken']
-            response = self.client.post("handleregistration",{"uvus":self.uvus,"password":self.password},headers={"X-CSRFToken": csrftoken})
+            response = self.client.post("handleregistration/",{"uvus":self.uvus,"password":self.password},headers={"X-CSRFToken": csrftoken})
             if 'Error al logear' in response.text:
                 ret = False
             else:
@@ -45,7 +64,7 @@ class Test(HttpUser):
             print("Registered user and got: ", ret)
             response = self.client.get("login")
             csrftoken = response.cookies['csrftoken']
-            response = self.client.post("handlelogin",{"uvus":self.uvus,"password":self.password},headers={"X-CSRFToken": csrftoken})
+            response = self.client.post("handlelogin/",{"uvus":self.uvus,"password":self.password},headers={"X-CSRFToken": csrftoken})
             if 'Error al logear' in response.text:
                 ret = False
             else:
@@ -69,6 +88,6 @@ class Test(HttpUser):
         self.client.get("")
     #@task 
     def empty(self):
-            response = self.client.get("")
-            csrftoken = response.cookies['csrftoken']
-            response = self.client.post("",{},headers={"X-CSRFToken": csrftoken})
+        response = self.client.get("")
+        csrftoken = response.cookies['csrftoken']
+        response = self.client.post("",{},headers={"X-CSRFToken": csrftoken})
