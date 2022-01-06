@@ -21,4 +21,4 @@ web_run:
 web_test:
   extends: 
     service: web
-  command: python innosoftFinanzas/manage.py test
+  command: python innosoftFinanzas/manage.py test inventario necesidades
