@@ -1,7 +1,10 @@
-from inventario.models import Producto, Categoria
 import json
+
 # Create your tests here.
 from django.test import TestCase
+
+from inventario.models import Producto, Categoria
+
 
 class InventarioTest(TestCase):
     def setUp(self):
@@ -11,7 +14,6 @@ class InventarioTest(TestCase):
         super().tearDown()
 
     def test_create_categoria(self):
-
         c = Categoria(categoria="Prueba")
         c.save()
         self.assertTrue(Categoria.objects.all().filter(categoria="Prueba").exists())
@@ -19,7 +21,7 @@ class InventarioTest(TestCase):
     def test_create_producto(self):
         c = Categoria(categoria="Prueba")
         c.save()
-        p = Producto(nombre="Prueba 1", categoria=c, unidades=1, valorMonetario=12,descripcion="holaaa")
+        p = Producto(nombre="Prueba 1", categoria=c, unidades=1, valorMonetario=12, descripcion="holaaa")
         p.save()
         self.assertTrue(Producto.objects.all().filter(nombre="Prueba 1").exists())
         self.assertTrue(Producto.objects.all().filter(categoria=c).exists())
@@ -27,7 +29,7 @@ class InventarioTest(TestCase):
     def test_create_producto_from_form(self):
         c = Categoria(categoria="Prueba")
         c.save()
-        p = Producto(nombre="Prueba 1", categoria=c, unidades=1, valorMonetario=12,descripcion="holaaa")
+        p = Producto(nombre="Prueba 1", categoria=c, unidades=1, valorMonetario=12, descripcion="holaaa")
         p.save()
         self.assertTrue(Producto.objects.all().filter(nombre="Prueba 1").exists())
         self.assertTrue(Producto.objects.all().filter(categoria=c).exists())
@@ -44,7 +46,9 @@ class InventarioTest(TestCase):
     def test_form_producto(self):
         c = Categoria(categoria="Prueba")
         c.save()
-        resp = self.client.post('/inventario/nuevoProducto', {'nombre':'probando', 'categoria': "Prueba", 'unidades': '12', 'valorMonetario': '12', 'descripcion': 'a'})
+        resp = self.client.post('/inventario/nuevoProducto',
+                                {'nombre': 'probando', 'categoria': "Prueba", 'unidades': '12', 'valorMonetario': '12',
+                                 'descripcion': 'a'})
         self.assertEqual(resp.status_code, 200)
         self.assertTrue(Producto.objects.all().filter(nombre="probando").exists())
 
@@ -53,7 +57,7 @@ class InventarioTest(TestCase):
         c.save()
         p = Producto(nombre="Prueba 1", categoria=c, unidades=1, valorMonetario=12, descripcion="holaaa")
         p.save()
-        resp = self.client.get('/inventario/modificarProducto/'+str(p.id))
+        resp = self.client.get('/inventario/modificarProducto/' + str(p.id))
         data = json.loads(resp.content)
         s = json.dumps(data, indent=4, sort_keys=True)
         y = json.loads(s)

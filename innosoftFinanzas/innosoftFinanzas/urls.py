@@ -58,5 +58,7 @@ urlpatterns = [
     path("necesidades/modificar/<str:id>", necesidadesViews.modificarNecesidad, name="modificarNecesidad"),
     path("necesidades/necesidades", necesidadesViews.listNecesidad, name="necesidades"),
     path("necesidades/nuevaNecesidad", necesidadesViews.formNecesidad, name="nuevaNecesidad"),
+    path("necesidades/eliminar/<str:id>", necesidadesViews.eliminarNecesidad),
     path("necesidades/nuevoComite", necesidadesViews.formComite, name="nuevoComite"),
+    path("necesidades/comite/eliminar/<str:id>", necesidadesViews.eliminarComite),
 ]

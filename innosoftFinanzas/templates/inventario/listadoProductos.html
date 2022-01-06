@@ -35,7 +35,7 @@
 
 {% block content %}
 
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalAnadirProducto">Añadir Producto</button>
+    <button id="botonAniadirProducto" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalAnadirProducto">Añadir Producto</button>
     <h3>Productos:</h3>
     <table id="tablaProductos" class="table table-sm table-striped table-bordered table-hover nowrap">
         <thead>
@@ -67,8 +67,8 @@
                     {{ producto.descripcion }}
                 </th>
                 <th>
-                    <button  onclick='mostrarModalModificarProducto( {{ producto.id }} );' class='btn btn-info btn-sm modificar' data-toggle="modal" data-target="#modalModificarProducto" type='button'>Modificar Producto</button>
-                    <button onclick="eliminarProducto('{{ producto.id }}')" class='btn btn-info btn-sm modificar' >Eliminar Producto</button>
+                    <button  onclick='mostrarModalModificarProducto( {{ producto.id }} );' class='btn btn-info btn-sm modificar modificarProducto' data-toggle="modal" data-target="#modalModificarProducto" type='button'>Modificar Producto</button>
+                    <button onclick="eliminarProducto('{{ producto.id }}')" class='btn btn-info btn-sm modificar eliminarProducto' >Eliminar Producto</button>
                 </th>
             </tr>
             {% endfor %}
@@ -76,7 +76,7 @@
     </table>
     <br><br>
 
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalAnadirCategoria">Añadir Categoría</button>
+    <button id="botonAniadirCategoria" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modalAnadirCategoria">Añadir Categoría</button>
     <h3>Categorias:</h3>
     <table id="tablaCategorias"  class="table table-sm table-striped table-bordered table-hover nowrap">
         <thead>
@@ -92,7 +92,7 @@
                         {{ categoria.categoria }}
                     </th>
                     <th>
-                        <button onclick="eliminarCategoria('{{ categoria.id }}')" class='btn btn-info btn-sm modificar'>Eliminar Categoria</button>
+                        <button onclick="eliminarCategoria('{{ categoria.id }}')" class='btn btn-info btn-sm modificar eliminarCategoria'>Eliminar Categoria</button>
                     </th>
                 </tr>
             {% endfor %}
