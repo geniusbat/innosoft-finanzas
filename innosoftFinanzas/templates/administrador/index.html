@@ -11,7 +11,7 @@
 {% endblock head %}
 
 {% block header %}
-    <h1 class="text-center">Esta es la página de administracion</h1>
+    <h1 class="text-center">Esta es la página de administracion</h1><br>
 {% endblock header %}
 
 {% block navBar %}
@@ -19,10 +19,17 @@
 {% endblock navBar %}
 
 {% block content %}
-    <a href="{% url 'adminUsuarios'%}">Adminstrar usuarios</a>
-    <a href="{% url 'productos'%}">Adminstrar productos</a>
-    <a href="{% url 'necesidades'%}">Adminstrar necesidades</a>
-    <a href="{% url 'productos'%}">Adminstrar sugerencias</a>
+
+    <table id="tablaAdmin" class="table table-sm table-striped table-bordered table-hover nowrap">
+        <thead>
+            <tr>
+                <th> <a href="{% url 'adminUsuarios'%}">Adminstrar usuarios</a></th>
+                <th><a href="{% url 'productos'%}">Adminstrar productos</a></th>
+                <th><a href="{% url 'necesidades'%}">Adminstrar necesidades</a></th>
+                <th><a href="{% url 'productos'%}">Adminstrar sugerencias</a></th>
+            </tr>
+        </thead>
+    </table>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
