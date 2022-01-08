@@ -36,7 +36,15 @@
         {% endfor %}
     </table>
     {% load static %}
-    <script src="{% static 'administrador/js/adminUsuarios.js' %}"></script>
+    <script>
+        function modificarUsuario(uvus) {
+        window.location.href = '/admin/usuarios/modificar/'+uvus;
+    }
+
+    function eliminarUsuario(uvus) {
+        window.location.href = '/admin/usuarios/eliminar/'+uvus;
+    }
+    </script>
 {% endblock content %}
 
 {% block footer %}
