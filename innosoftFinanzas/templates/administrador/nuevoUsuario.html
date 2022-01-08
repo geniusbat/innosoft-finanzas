@@ -14,19 +14,33 @@
 
 {% block content %}
 
-<h2>Se dispone a crear un nuevo  usuario </h2>
+<h2>Se dispone a crear un nuevo  usuario </h2><br>
 
 <form action="{% url 'handleNuevoUsuario' %}" method="post">
     {% csrf_token %}
-    <label>Uvus</label>
+        <label><h4>Uvus:</h4></label>
     <input id="uvusInput" name="uvus" type="text"><br>
-    <label>Rol</label>
-    <input id="rolInput" name="rol" type="radio" value="NA"><br>
-    <input id="rolInput" name="rol" type="radio" value="MB"><br>
-    <input id="rolInput" name="rol" type="radio" value="CD"><br>
-    <input id="rolInput" name="rol" type="radio" value="PR"><br>
-    <input id="rolInput" name="rol" type="radio" value="SU"><br>
-    <input type="submit" value="Crear">
+     <label>Rol:</label><br>
+        <table id="tablaAdminusu" class="table table-sm table-striped table-bordered table-hover nowrap">
+        <thead>
+            <tr>
+                <th ><input id="rolInput" name="rol" type="radio" value="NA"> NA</th>
+            </tr>
+            <tr>
+                <th ><input id="rolInput" name="rol" type="radio" value="MB"> MB</th>
+            </tr>
+            <tr>
+                <th ><input id="rolInput" name="rol" type="radio" value="CD"> CD</th>
+            </tr>
+            <tr>
+                <th ><input id="rolInput" name="rol" type="radio" value="PR"> PR</th>
+            </tr>
+            <tr>
+                <th ><input id="rolInput" name="rol" type="radio" value="SU"> SU</th>
+            </tr>
+        </thead>
+    </table>
+            <input type="submit" value="Crear">
 </form>
 
 {% endblock content %}

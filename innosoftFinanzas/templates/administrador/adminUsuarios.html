@@ -13,12 +13,19 @@
 {% endblock navBar %}
 
 {% block content %}
-    <a href="{% url 'nuevoUsuario' %}">Crear usuario</a>
+     <table id="tablaAdminusu" align="center">
+        <thead >
+            <tr >
+                <th ><a  href="{% url 'nuevoUsuario' %}"><h3>Crear usuario</h3></a></th>
+            </tr>
+        </thead>
+    </table>
     <h3>Usuarios:</h3>
-    <table>
+        <table class="table table-sm table-striped table-bordered table-hover nowrap">
         <tr>
-            <th>uvus</th>
-            <th>rol</th>
+            <th>UVUS</th>
+            <th>ROL</th>
+            <th>Acciones</th>
         </tr>
         {% for user in usuarios %}
         <tr>
