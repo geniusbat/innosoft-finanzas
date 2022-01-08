@@ -39,7 +39,7 @@
     <h3>Necesidades:</h3>
     <table id="tablaNecesidad" class="table table-sm table-striped table-bordered table-hover nowrap">
         <thead>
-            <tr>
+            <tr style="background-color: #afc1d7">
                 <th>Nombre:</th>
                 <th>Comité:</th>
                 <th>Cantidad necesitada:</th>
@@ -76,7 +76,7 @@
     <h3>Comités:</h3>
     <table id="tablaComites"  class="table table-sm table-striped table-bordered table-hover nowrap">
         <thead>
-            <tr>
+            <tr style="background-color: #afc1d7">
                 <th>Comité:</th>
                 <th>Acciones:</th>
             </tr>
@@ -127,7 +127,7 @@ function eliminarComite(id) {
 
 $(document).ready( function () {
 
-    $('#tablaProductos').DataTable({
+    $('#tablaNecesidad').DataTable({
         responsive: true,
 		"language" : {
 			"url" : "https:////cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
@@ -135,7 +135,7 @@ $(document).ready( function () {
         "lengthMenu" : [ 5,4,3,2 ]
     });
 
-    $('#tablaCategorias').DataTable({
+    $('#tablaComites').DataTable({
         responsive: true,
 		"language" : {
 			"url" : "https:////cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
