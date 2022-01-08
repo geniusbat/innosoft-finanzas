@@ -19,6 +19,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 {% endblock head %}
 
 {% block navBar %}
@@ -39,7 +40,7 @@
     <h3>Productos:</h3>
     <table id="tablaProductos" class="table table-sm table-striped table-bordered table-hover nowrap">
         <thead>
-            <tr>
+            <tr style="background-color: #afc1d7">
                 <th>Nombre:</th>
                 <th>Categoría:</th>
                 <th>Unidades:</th>
@@ -80,7 +81,7 @@
     <h3>Categorias:</h3>
     <table id="tablaCategorias"  class="table table-sm table-striped table-bordered table-hover nowrap">
         <thead>
-            <tr>
+            <tr style="background-color: #afc1d7">
                 <th>Categoria:</th>
                 <th>Acciones:</th>
             </tr>
@@ -166,6 +167,8 @@ function mostrarModalModificarProducto(id) {
     });
 
 }
+
+
 </script>
     {% include "inventario/modalAnadirCategoria.html" %}
     {% include "inventario/modalAnadirProducto.html" %}
