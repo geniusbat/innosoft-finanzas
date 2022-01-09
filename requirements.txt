@@ -11,3 +11,4 @@ selenium
 requests
 djangorestframework
 django-rest-swagger
+locust
